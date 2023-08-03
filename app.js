@@ -12,6 +12,9 @@ const auth = require("./auth");
 // execute database connection
 dbConnect();
 
+const router = require('express').Router();
+app.use('/', router);
+
 // Curb Cores Error by adding a header here
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -57,7 +60,7 @@ app.post("/register", (request, response) => {
             result,
           });
         })
-        // catch erroe if the new user wasn't added successfully to the database
+        // catch error if the new user wasn't added successfully to the database
         .catch((error) => {
           response.status(500).send({
             message: "Error creating user",
